@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemo"
+        mc:Ignorable="d"
+        Title="WpfDemo" Margin="5" Height="137.426" Width="408.939"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,5,5" VerticalAlignment="Center">First Name:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,5,5" Text="{Binding FirstName}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,5,5" VerticalAlignment="Center">Last Name:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,5,5" Text="{Binding LastName}" />
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="5,0,0,5" />
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Width="70" Margin="0,0,5,0" Command="{Binding SayHelloCommand}">Say Hello</Button>
+            <Button Width="70" Margin="0,0,5,0" Command ="{Binding ClearCommand}">Clear</Button>
+        </StackPanel>
+    </Grid>
+</Window>
