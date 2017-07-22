@@ -7,7 +7,6 @@ namespace WpfDemo
     {
         private readonly Action _action;
         private readonly Predicate<object> _canExecute;
-
         public event EventHandler CanExecuteChanged;
 
         public DelegateCommand(Action action)
@@ -32,10 +31,7 @@ namespace WpfDemo
 
         public void RaiseCanExecuteChanged()
         {
-            if (CanExecuteChanged != null)
-            {
-                CanExecuteChanged(this, new EventArgs());
-            }
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

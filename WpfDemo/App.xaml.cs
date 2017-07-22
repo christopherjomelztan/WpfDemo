@@ -12,10 +12,6 @@ namespace WpfDemo
             var mainViewModel = new MainViewModel();
             var mainView = new MainWindow();
             mainView.DataContext = mainViewModel;
-
-            mainViewModel.FirstName = "FirstName";
-            mainViewModel.LastName = "LastName";
-
             mainView.Show();
         }
     }

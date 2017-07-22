@@ -1,35 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
+using WpfDemo.Class;
 
 namespace WpfDemo
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BindableBase
     {
-        
-
-        public event PropertyChangedEventHandler PropertyChanged;
-       
-        public void OnPropertyChanged(string propertyName)
+        private Person _person = new Person();
+        public string FirstName
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return _person.FirstName; }
+            set {
+                _person.FirstName = value;
+                OnPropertyChanged(nameof(_person.FirstName));
+                ClearCommand.RaiseCanExecuteChanged();
+                SayHelloCommand.RaiseCanExecuteChanged();
+            }
+        }
+        public string LastName
+        {
+            get { return _person.LastName; }
+            set
+            {
+                _person.LastName = value;
+                OnPropertyChanged(nameof(_person.LastName));
+                ClearCommand.RaiseCanExecuteChanged();
+                SayHelloCommand.RaiseCanExecuteChanged();
+            }
         }
 
-
-
-
-
-        public ICommand SayHelloCommand
+        public DelegateCommand SayHelloCommand
         {
             get; set;
         }
-
-
 
         public DelegateCommand ClearCommand
         {
@@ -38,25 +40,11 @@ namespace WpfDemo
 
         public MainViewModel()
         {
-            SayHelloCommand = new DelegateCommand(SayHello);
-            ClearCommand = new DelegateCommand(Clear, CanClear);
+            SayHelloCommand = new DelegateCommand(SayHello, CommandsEnabled);
+            ClearCommand = new DelegateCommand(Clear, CommandsEnabled);
+            FirstName = "Natch";
+            LastName = "Dev";
         }
-
-
-        private string _FirstName;
-        private string _LastName;
-        public string FirstName { get { return _FirstName; } set
-            { _FirstName = value;
-                OnPropertyChanged("FirstName");
-                ClearCommand.RaiseCanExecuteChanged();
-            } }
-
-        public string LastName {get { return _LastName; } set { _LastName = value; OnPropertyChanged("LastName");
-                ClearCommand.RaiseCanExecuteChanged();
-            } }
-
-
-        
 
         private void SayHello()
         {
@@ -69,7 +57,7 @@ namespace WpfDemo
 
         }
 
-        private bool CanClear(object parameter)
+        private bool CommandsEnabled(object parameter)
         {
             return !string.IsNullOrEmpty(FirstName) || !string.IsNullOrEmpty(LastName);
         }
