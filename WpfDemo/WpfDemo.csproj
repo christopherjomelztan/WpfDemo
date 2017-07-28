@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="Class\BindableBase.cs" />
     <Compile Include="Class\Person.cs" />
-    <Compile Include="Class\DelegateCommand.cs" />
+    <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Interface\IPerson.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
